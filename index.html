@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>S Sri Ram | ECE Student | Embedded Systems | VLSI | Hardware</title>
+<meta name="description" content="Portfolio of S Sri Ram, Electronics and Communication Engineering student specializing in Embedded Systems, VLSI, IoT, FPGA, PCB Design and Electronics Hardware." />
+<meta name="theme-color" content="#FBFAF7" />
+
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<!-- Tailwind (CDN build — fine for a static single-file site; swap for a compiled build if you later add a bundler) -->
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          paper: '#FBFAF7',
+          ink: '#14181F',
+          inkmute: '#4B5361',
+          teal: { DEFAULT: '#0B6E76', dark: '#08545A' },
+          copper: '#B9702F',
+          line: '#E3E0D6',
+          card: '#FFFFFF',
+        },
+        fontFamily: {
+          display: ['"Space Grotesk"', 'sans-serif'],
+          body: ['"IBM Plex Sans"', 'sans-serif'],
+          mono: ['"IBM Plex Mono"', 'monospace'],
+        },
+        maxWidth: { prose: '72ch' },
+      }
+    }
+  }
+</script>
+
+<!-- Lucide icons -->
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+
+<style>
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    * { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; }
+  }
+  body { background: #FBFAF7; color: #14181F; }
+
+  /* Hero PCB trace — draws once on load */
+  .trace-path {
+    stroke-dasharray: 1400;
+    stroke-dashoffset: 1400;
+    animation: draw 2.4s ease-out forwards;
+  }
+  .trace-path.delay1 { animation-delay: .2s; }
+  .trace-path.delay2 { animation-delay: .45s; }
+  .trace-path.delay3 { animation-delay: .7s; }
+  @keyframes draw { to { stroke-dashoffset: 0; } }
+  .trace-node {
+    opacity: 0;
+    animation: nodeIn .5s ease-out forwards;
+  }
+  @keyframes nodeIn { to { opacity: 1; } }
+
+  /* scroll reveal */
+  .reveal { opacity: 0; transform: translateY(14px); transition: opacity .6s ease, transform .6s ease; }
+  .reveal.in { opacity: 1; transform: translateY(0); }
+
+  .nav-link { position: relative; }
+  .nav-link.active { color: #0B6E76; }
+  .nav-link.active::after {
+    content: ''; position: absolute; left: 0; right: 0; bottom: -6px; height: 2px; background: #0B6E76;
+  }
+
+  ::selection { background: #0B6E76; color: #FBFAF7; }
+
+  .focus-ring:focus-visible {
+    outline: 2px solid #0B6E76; outline-offset: 3px; border-radius: 2px;
+  }
+
+  details > summary { list-style: none; cursor: pointer; }
+  details > summary::-webkit-details-marker { display: none; }
+  details[open] .chev { transform: rotate(180deg); }
+  .chev { transition: transform .25s ease; }
+</style>
+</head>
+<body class="font-body text-ink antialiased">
+
+<!-- ============ NAVBAR ============ -->
+<header id="navbar" class="fixed top-0 inset-x-0 z-50 bg-paper/90 backdrop-blur border-b border-line transition-shadow">
+  <div class="max-w-6xl mx-auto px-5 sm:px-8 h-16 flex items-center justify-between">
+    <a href="#home" class="font-display font-semibold text-lg tracking-tight focus-ring">S Sri Ram</a>
+
+    <nav class="hidden md:flex items-center gap-8 text-sm">
+      <a href="#about" class="nav-link focus-ring hover:text-teal transition-colors">About</a>
+      <a href="#skills" class="nav-link focus-ring hover:text-teal transition-colors">Skills</a>
+      <a href="#projects" class="nav-link focus-ring hover:text-teal transition-colors">Projects</a>
+      <a href="#experience" class="nav-link focus-ring hover:text-teal transition-colors">Experience</a>
+      <a href="#education" class="nav-link focus-ring hover:text-teal transition-colors">Education</a>
+      <a href="#contact" class="nav-link focus-ring hover:text-teal transition-colors">Contact</a>
+    </nav>
+
+    <div class="flex items-center gap-3">
+      <a href="/resume/S_Sri_Ram_Resume.pdf" download
+         class="hidden sm:inline-flex items-center gap-2 bg-ink text-paper text-sm font-medium px-4 py-2 rounded-sm hover:bg-teal-dark transition-colors focus-ring">
+        <i data-lucide="download" class="w-4 h-4"></i> Resume
+      </a>
+      <button id="menuBtn" aria-label="Open menu" aria-expanded="false" class="md:hidden p-2 focus-ring">
+        <i data-lucide="menu" class="w-6 h-6"></i>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile menu -->
+  <div id="mobileMenu" class="hidden md:hidden border-t border-line bg-paper px-5 pb-5 pt-2 space-y-1">
+    <a href="#about" class="block py-2 text-sm focus-ring">About</a>
+    <a href="#skills" class="block py-2 text-sm focus-ring">Skills</a>
+    <a href="#projects" class="block py-2 text-sm focus-ring">Projects</a>
+    <a href="#experience" class="block py-2 text-sm focus-ring">Experience</a>
+    <a href="#education" class="block py-2 text-sm focus-ring">Education</a>
+    <a href="#contact" class="block py-2 text-sm focus-ring">Contact</a>
+    <a href="/resume/S_Sri_Ram_Resume.pdf" download class="flex items-center gap-2 mt-2 bg-ink text-paper text-sm font-medium px-4 py-2.5 rounded-sm w-fit focus-ring">
+      <i data-lucide="download" class="w-4 h-4"></i> Download Resume
+    </a>
+  </div>
+</header>
+
+<main>
+<!-- ============ HERO ============ -->
+<section id="home" class="relative pt-32 pb-24 sm:pt-40 sm:pb-32 overflow-hidden">
+  <!-- PCB trace background -->
+  <svg class="absolute inset-0 w-full h-full pointer-events-none opacity-[0.55]" viewBox="0 0 1200 700" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <g fill="none" stroke="#0B6E76" stroke-width="1.4">
+      <path class="trace-path" d="M -20 120 H 260 L 300 160 V 320 L 340 360 H 620" />
+      <path class="trace-path delay1" d="M 1220 90 H 940 L 900 130 V 250 L 860 290 H 700" />
+      <path class="trace-path delay2" d="M -20 560 H 220 L 260 520 V 420 L 300 380" />
+      <path class="trace-path delay3" d="M 1220 620 H 960 L 920 580 V 480 L 880 440" />
+    </g>
+    <g fill="#0B6E76">
+      <circle class="trace-node" style="animation-delay:1.4s" cx="300" cy="160" r="4" />
+      <circle class="trace-node" style="animation-delay:1.6s" cx="340" cy="360" r="4" />
+      <circle class="trace-node" style="animation-delay:1.5s" cx="900" cy="130" r="4" />
+      <circle class="trace-node" style="animation-delay:1.7s" cx="260" cy="520" r="4" />
+      <circle class="trace-node" style="animation-delay:1.8s" cx="920" cy="580" r="4" />
+    </g>
+  </svg>
+
+  <div class="relative max-w-6xl mx-auto px-5 sm:px-8">
+    <p class="font-mono text-xs text-inkmute tracking-wide mb-5">Electronics &amp; Communication Engineering · Class of 2027</p>
+
+    <h1 class="font-display font-semibold text-4xl sm:text-6xl leading-[1.05] max-w-3xl">
+      S Sri Ram
+    </h1>
+    <p class="mt-4 text-xl sm:text-2xl text-inkmute font-display max-w-2xl">
+      Embedded Systems · VLSI · IoT · Hardware Design
+    </p>
+
+    <p class="mt-6 max-w-prose text-inkmute leading-relaxed">
+      Electronics and Communication Engineering student passionate about embedded systems, VLSI, IoT, and hardware development. I enjoy transforming electronics concepts into practical systems using microcontrollers, sensors, communication technologies, and digital design.
+    </p>
+
+    <div class="mt-9 flex flex-wrap items-center gap-4">
+      <a href="#projects" class="inline-flex items-center gap-2 bg-teal text-paper px-5 py-3 rounded-sm text-sm font-medium hover:bg-teal-dark transition-colors focus-ring">
+        View My Projects <i data-lucide="arrow-right" class="w-4 h-4"></i>
+      </a>
+      <a href="/resume/S_Sri_Ram_Resume.pdf" download class="inline-flex items-center gap-2 border border-ink px-5 py-3 rounded-sm text-sm font-medium hover:bg-ink hover:text-paper transition-colors focus-ring">
+        <i data-lucide="download" class="w-4 h-4"></i> Download Resume
+      </a>
+    </div>
+
+    <div class="mt-8 flex items-center gap-5 text-inkmute">
+      <a href="https://github.com/Sriram1708" target="_blank" rel="noopener noreferrer" aria-label="GitHub" class="hover:text-teal transition-colors focus-ring"><i data-lucide="github" class="w-5 h-5"></i></a>
+      <a href="http://www.linkedin.com/in/sri-ram-b34356320" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="hover:text-teal transition-colors focus-ring"><i data-lucide="linkedin" class="w-5 h-5"></i></a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ABOUT ============ -->
+<section id="about" class="py-24 border-t border-line">
+  <div class="max-w-6xl mx-auto px-5 sm:px-8 grid md:grid-cols-5 gap-12">
+    <div class="md:col-span-3 reveal">
+      <h2 class="font-display font-semibold text-3xl mb-6">About</h2>
+      <div class="space-y-4 text-inkmute leading-relaxed max-w-prose">
+        <p>I am an Electronics and Communication Engineering student at Einstein College of Engineering, graduating in 2027 with a CGPA of 7.72.</p>
+        <p>My primary interests are Embedded Systems, Electronics Hardware, VLSI, FPGA Design, IoT, and PCB Design. Through academic projects, internships, simulations, and hands-on hardware development, I have gained practical experience in designing, programming, testing, and debugging electronic systems.</p>
+        <p>I am particularly interested in opportunities where I can apply my knowledge of embedded systems, digital electronics, VLSI, and hardware development to solve real-world engineering problems.</p>
+      </div>
+    </div>
+
+    <div class="md:col-span-2 reveal">
+      <div class="border border-line rounded-sm bg-card p-6">
+        <dl class="space-y-5">
+          <div>
+            <dt class="font-mono text-xs text-teal tracking-wide">Education</dt>
+            <dd class="mt-1 text-sm">B.E. Electronics and Communication Engineering</dd>
+          </div>
+          <div class="grid grid-cols-2 gap-5">
+            <div>
+              <dt class="font-mono text-xs text-teal tracking-wide">Graduation</dt>
+              <dd class="mt-1 text-sm">2027</dd>
+            </div>
+            <div>
+              <dt class="font-mono text-xs text-teal tracking-wide">CGPA</dt>
+              <dd class="mt-1 text-sm">7.72</dd>
+            </div>
+          </div>
+          <div>
+            <dt class="font-mono text-xs text-teal tracking-wide">Focus</dt>
+            <dd class="mt-1 text-sm">Embedded Systems · VLSI · Hardware</dd>
+          </div>
+        </dl>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SKILLS ============ -->
+<section id="skills" class="py-24 border-t border-line bg-white/50">
+  <div class="max-w-6xl mx-auto px-5 sm:px-8">
+    <h2 class="font-display font-semibold text-3xl mb-2 reveal">Technical Skills</h2>
+    <p class="text-inkmute mb-12 reveal">Tools and technologies I work with, grouped by domain.</p>
+    <div id="skillsGrid" class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5"></div>
+  </div>
+</section>
+
+<!-- ============ PROJECTS ============ -->
+<section id="projects" class="py-24 border-t border-line">
+  <div class="max-w-6xl mx-auto px-5 sm:px-8">
+    <h2 class="font-display font-semibold text-3xl mb-2 reveal">Projects</h2>
+    <p class="text-inkmute mb-12 reveal">Academic hardware and embedded systems projects — click a card for details.</p>
+    <div id="projectsGrid" class="grid md:grid-cols-1 gap-5"></div>
+  </div>
+</section>
+
+<!-- ============ EXPERIENCE ============ -->
+<section id="experience" class="py-24 border-t border-line bg-white/50">
+  <div class="max-w-6xl mx-auto px-5 sm:px-8">
+    <h2 class="font-display font-semibold text-3xl mb-2 reveal">Experience</h2>
+    <p class="text-inkmute mb-12 reveal">Industrial and internship experience, in chronological order.</p>
+    <div id="experienceTimeline" class="space-y-0"></div>
+  </div>
+</section>
+
+<!-- ============ EDUCATION ============ -->
+<section id="education" class="py-24 border-t border-line">
+  <div class="max-w-6xl mx-auto px-5 sm:px-8">
+    <h2 class="font-display font-semibold text-3xl mb-10 reveal">Education</h2>
+    <div class="reveal border border-line rounded-sm bg-card p-8 flex flex-col sm:flex-row sm:items-center gap-8 relative overflow-hidden">
+      <svg class="absolute right-0 top-0 h-full w-40 opacity-10" viewBox="0 0 100 100" aria-hidden="true">
+        <circle cx="80" cy="20" r="3" fill="#0B6E76"/>
+        <path d="M80 20 V50 H50 V80" stroke="#0B6E76" stroke-width="1.5" fill="none"/>
+        <circle cx="50" cy="80" r="3" fill="#0B6E76"/>
+        <path d="M80 20 H30" stroke="#0B6E76" stroke-width="1.5" fill="none"/>
+        <circle cx="30" cy="20" r="3" fill="#0B6E76"/>
+      </svg>
+      <div class="relative z-10">
+        <h3 class="font-display font-semibold text-xl">B.E. Electronics and Communication Engineering</h3>
+        <p class="text-inkmute mt-1">Einstein College of Engineering</p>
+        <p class="font-mono text-sm text-inkmute mt-3">2023 – 2027</p>
+      </div>
+      <div class="relative z-10 sm:ml-auto">
+        <span class="inline-flex items-center gap-2 border border-teal text-teal font-mono text-sm px-4 py-2 rounded-sm">
+          CGPA 7.72
+        </span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CAREER FOCUS ============ -->
+<section class="py-24 border-t border-line bg-white/50">
+  <div class="max-w-6xl mx-auto px-5 sm:px-8">
+    <h2 class="font-display font-semibold text-3xl mb-10 reveal">What I'm Interested In</h2>
+    <div id="focusGrid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5"></div>
+  </div>
+</section>
+
+<!-- ============ RESUME CTA ============ -->
+<section class="py-24 border-t border-line">
+  <div class="max-w-6xl mx-auto px-5 sm:px-8">
+    <div class="reveal bg-ink text-paper rounded-sm p-10 sm:p-14 flex flex-col lg:flex-row lg:items-center gap-8 lg:justify-between">
+      <div class="max-w-xl">
+        <h2 class="font-display font-semibold text-2xl sm:text-3xl">Interested in working together?</h2>
+        <p class="mt-3 text-paper/70 leading-relaxed">I'm actively looking for opportunities to apply my electronics, embedded systems, VLSI, and hardware skills in real-world engineering environments.</p>
+      </div>
+      <div class="flex flex-wrap gap-4">
+        <a href="/resume/S_Sri_Ram_Resume.pdf" download class="inline-flex items-center gap-2 bg-paper text-ink px-5 py-3 rounded-sm text-sm font-medium hover:bg-teal hover:text-paper transition-colors focus-ring">
+          <i data-lucide="download" class="w-4 h-4"></i> Download Resume
+        </a>
+        <a href="http://www.linkedin.com/in/sri-ram-b34356320" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 border border-paper/40 px-5 py-3 rounded-sm text-sm font-medium hover:bg-paper/10 transition-colors focus-ring">
+          <i data-lucide="linkedin" class="w-4 h-4"></i> View LinkedIn
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONTACT ============ -->
+<section id="contact" class="py-24 border-t border-line">
+  <div class="max-w-6xl mx-auto px-5 sm:px-8 grid md:grid-cols-5 gap-12">
+    <div class="md:col-span-2 reveal">
+      <h2 class="font-display font-semibold text-3xl mb-6">Let's Connect</h2>
+      <p class="text-inkmute mb-8">S Sri Ram</p>
+      <ul class="space-y-4 text-sm">
+        <li class="flex items-center gap-3">
+          <i data-lucide="mail" class="w-4 h-4 text-teal"></i>
+          <a href="mailto:your.email@example.com" class="hover:text-teal transition-colors focus-ring">your.email@example.com</a>
+        </li>
+        <li class="flex items-center gap-3">
+          <i data-lucide="linkedin" class="w-4 h-4 text-teal"></i>
+          <a href="http://www.linkedin.com/in/sri-ram-b34356320" target="_blank" rel="noopener noreferrer" class="hover:text-teal transition-colors focus-ring">linkedin.com/in/sri-ram-b34356320</a>
+        </li>
+        <li class="flex items-center gap-3">
+          <i data-lucide="github" class="w-4 h-4 text-teal"></i>
+          <a href="https://github.com/Sriram1708" target="_blank" rel="noopener noreferrer" class="hover:text-teal transition-colors focus-ring">github.com/Sriram1708</a>
+        </li>
+      </ul>
+      <p class="text-xs text-inkmute/70 mt-8 font-mono">Email is a placeholder — replace with your real address in index.html.</p>
+    </div>
+
+    <div class="md:col-span-3 reveal">
+      <!-- Frontend-only form. To wire it up: point the `action` at a service
+           (Formspree, Getform, Web3Forms, etc.) or replace handleSubmit()
+           below with a fetch() call to your own backend endpoint. -->
+      <form id="contactForm" class="space-y-5" novalidate>
+        <div>
+          <label for="name" class="block text-sm font-medium mb-2">Name</label>
+          <input id="name" name="name" type="text" required
+            class="w-full border border-line rounded-sm px-4 py-3 bg-card focus-ring focus:border-teal outline-none text-sm" />
+        </div>
+        <div>
+          <label for="email" class="block text-sm font-medium mb-2">Email</label>
+          <input id="email" name="email" type="email" required
+            class="w-full border border-line rounded-sm px-4 py-3 bg-card focus-ring focus:border-teal outline-none text-sm" />
+        </div>
+        <div>
+          <label for="message" class="block text-sm font-medium mb-2">Message</label>
+          <textarea id="message" name="message" rows="5" required
+            class="w-full border border-line rounded-sm px-4 py-3 bg-card focus-ring focus:border-teal outline-none text-sm resize-none"></textarea>
+        </div>
+        <button type="submit" class="inline-flex items-center gap-2 bg-teal text-paper px-5 py-3 rounded-sm text-sm font-medium hover:bg-teal-dark transition-colors focus-ring">
+          Send Message <i data-lucide="send" class="w-4 h-4"></i>
+        </button>
+        <p id="formStatus" class="text-sm hidden" role="status"></p>
+      </form>
+    </div>
+  </div>
+</section>
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer class="border-t border-line py-10">
+  <div class="max-w-6xl mx-auto px-5 sm:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-inkmute">
+    <p>© 2026 S Sri Ram. All rights reserved.</p>
+    <div class="flex items-center gap-5">
+      <a href="http://www.linkedin.com/in/sri-ram-b34356320" target="_blank" rel="noopener noreferrer" class="hover:text-teal transition-colors focus-ring">LinkedIn</a>
+      <a href="https://github.com/Sriram1708" target="_blank" rel="noopener noreferrer" class="hover:text-teal transition-colors focus-ring">GitHub</a>
+    </div>
+    <p class="font-mono text-xs">Built with passion for electronics &amp; technology.</p>
+  </div>
+</footer>
+
+<!-- ============ DATA + LOGIC ============ -->
+<!-- To add new content later, edit the arrays below — layout renders automatically. -->
+<script>
+lucide.createIcons();
+
+// ---------- DATA ----------
+const skills = [
+  { category: "Embedded & Hardware", icon: "cpu", items: ["Embedded C", "Arduino", "ESP32", "ESP32-CAM", "PCB Design", "KiCad"] },
+  { category: "VLSI & Digital Design", icon: "layers", items: ["Verilog HDL", "Cadence Virtuoso", "FPGA/VLSI Design Flow", "CMOS Fundamentals", "Digital Logic Design"] },
+  { category: "Programming & Tools", icon: "code-2", items: ["C", "C++", "Python", "MATLAB"] },
+  { category: "IoT & Simulation", icon: "radio-tower", items: ["ThingSpeak", "Vercel", "Wokwi Simulation", "IoT Systems", "Hardware Testing & Validation"] },
+];
+
+const projects = [
+  {
+    title: "Smart Waste Cleaning Robot — ESP32-CAM",
+    date: "April 2026",
+    type: "Academic Project",
+    tech: ["ESP32-CAM", "Embedded C", "Object Detection", "Motor Control", "Obstacle Avoidance", "Robotics"],
+    description: "Engineered an autonomous ESP32-CAM waste-collection robot combining real-time object detection with obstacle avoidance for unmanned water-surface navigation.",
+    contributions: [
+      "Built motor-control and navigation firmware using Embedded C",
+      "Implemented autonomous navigation logic",
+      "Enabled the robot to detect, approach, and collect floating waste",
+      "Integrated obstacle avoidance for autonomous movement",
+      "Reduced dependency on manual steering",
+    ],
+    github: null,
+  },
+  {
+    title: "Smart 3-Phase Power Monitoring & Automatic Phase Selector — ESP32",
+    date: "March 2026",
+    type: "Academic Project",
+    tech: ["ESP32", "IoT", "ThingSpeak", "Vercel", "Relay Control", "Wokwi", "Voltage Monitoring", "Current Monitoring"],
+    description: "Developed an ESP32-based IoT system for real-time 3-phase voltage and current monitoring with automatic relay-based phase switching to maintain uninterrupted power supply.",
+    contributions: [
+      "Implemented real-time 3-phase voltage and current monitoring",
+      "Designed automatic relay-based phase switching",
+      "Developed a live cloud dashboard using ThingSpeak and Vercel",
+      "Validated the complete control logic through Wokwi simulation",
+      "Deployed the system to physical hardware",
+    ],
+    github: null,
+  },
+  {
+    title: "Voice-Controlled Robot — VC-02 Module",
+    date: "February 2026",
+    type: "Academic Project",
+    tech: ["Arduino", "VC-02 Voice Recognition Module", "L298N", "C/C++", "Arduino IDE", "Robotics"],
+    description: "Built a voice-controlled robot using Arduino and the VC-02 recognition module, enabling wireless navigation through spoken commands.",
+    contributions: [
+      "Integrated the VC-02 voice recognition module",
+      "Implemented L298N motor-driver control logic",
+      "Translated recognized voice commands into real-time motor actions",
+      "Programmed the system using Arduino IDE and C/C++",
+      "Developed command-based robotic navigation",
+    ],
+    github: null,
+  },
+];
+
+const experience = [
+  {
+    role: "Industrial Intern — Telecommunication Department",
+    org: "NLC India Limited, Neyveli",
+    period: "June 16 – June 29, 2026",
+    tag: "Industrial Experience",
+    points: [
+      "Gained hands-on exposure to industrial telecommunication systems",
+      "Worked with optical fiber network infrastructure",
+      "Gained exposure to EPABX systems",
+      "Worked with LAN networking",
+      "Strengthened troubleshooting skills",
+      "Improved technical documentation skills",
+    ],
+  },
+  {
+    role: "VLSI Intern",
+    org: "MAXVY Technologies",
+    period: "December 15 – December 19, 2025",
+    tag: "Verilog HDL · RTL · Simulation · FPGA · VLSI",
+    points: [
+      "Simulated digital logic circuits and counters using Verilog HDL",
+      "Reinforced core digital design concepts",
+      "Studied the FPGA and VLSI design flow",
+      "Learned the flow from RTL design through simulation",
+      "Gained exposure to synthesis fundamentals",
+    ],
+  },
+  {
+    role: "Embedded Systems Intern",
+    org: "Bevy Wise Networks, Tirunelveli",
+    period: "May 2025 – June 2025",
+    tag: "Microcontrollers · Sensors · Embedded Systems · IoT · Automation",
+    points: [
+      "Programmed microcontrollers",
+      "Interfaced sensors",
+      "Gained hands-on embedded systems experience",
+      "Contributed to basic IoT and automation projects",
+      "Gained practical exposure to hardware connections",
+      "Worked with debugging workflows",
+    ],
+  },
+];
+
+const focusAreas = [
+  { title: "Embedded Systems", icon: "cpu", desc: "Microcontrollers, Embedded C, sensors, motor control, IoT" },
+  { title: "VLSI & FPGA", icon: "layers", desc: "Verilog HDL, RTL design, simulation, synthesis, CMOS fundamentals" },
+  { title: "Electronics Hardware", icon: "circuit-board", desc: "Circuit design, PCB design, hardware integration, testing" },
+  { title: "IoT & Automation", icon: "radio-tower", desc: "ESP32, Arduino, cloud dashboards, automation systems" },
+  { title: "Telecommunications", icon: "cable", desc: "Optical fiber, EPABX, LAN networking, industrial communication" },
+];
+
+// ---------- RENDER: SKILLS ----------
+const skillsGrid = document.getElementById("skillsGrid");
+skills.forEach(group => {
+  const el = document.createElement("div");
+  el.className = "reveal border border-line rounded-sm bg-card p-6 hover:border-teal/50 transition-colors";
+  el.innerHTML = `
+    <div class="flex items-center gap-2 mb-4">
+      <i data-lucide="${group.icon}" class="w-4 h-4 text-teal"></i>
+      <h3 class="font-display font-semibold text-sm">${group.category}</h3>
+    </div>
+    <ul class="space-y-2">
+      ${group.items.map(i => `<li class="text-sm text-inkmute font-mono">${i}</li>`).join("")}
+    </ul>
+  `;
+  skillsGrid.appendChild(el);
+});
+
+// ---------- RENDER: PROJECTS ----------
+const projectsGrid = document.getElementById("projectsGrid");
+projects.forEach((p, idx) => {
+  const el = document.createElement("details");
+  el.className = "reveal border border-line rounded-sm bg-card overflow-hidden group";
+  el.innerHTML = `
+    <summary class="p-6 sm:p-7 flex items-start justify-between gap-6 focus-ring">
+      <div>
+        <div class="flex flex-wrap items-center gap-3 mb-2">
+          <span class="font-mono text-xs text-teal border border-teal/40 rounded-sm px-2 py-0.5">${p.type}</span>
+          <span class="font-mono text-xs text-inkmute">${p.date}</span>
+        </div>
+        <h3 class="font-display font-semibold text-lg sm:text-xl">${p.title}</h3>
+        <p class="text-inkmute text-sm mt-2 max-w-prose">${p.description}</p>
+        <div class="flex flex-wrap gap-2 mt-4">
+          ${p.tech.map(t => `<span class="text-xs font-mono text-inkmute bg-paper border border-line rounded-sm px-2 py-1">${t}</span>`).join("")}
+        </div>
+      </div>
+      <i data-lucide="chevron-down" class="chev w-5 h-5 text-inkmute shrink-0 mt-1"></i>
+    </summary>
+    <div class="px-6 sm:px-7 pb-7 pt-1 border-t border-line">
+      <h4 class="font-mono text-xs text-teal tracking-wide mb-3 mt-4">Key Contributions</h4>
+      <ul class="space-y-2">
+        ${p.contributions.map(c => `<li class="text-sm text-inkmute flex gap-2"><span class="text-teal">–</span><span>${c}</span></li>`).join("")}
+      </ul>
+      ${p.github ? `<a href="${p.github}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 mt-5 text-sm font-medium text-teal hover:text-teal-dark focus-ring"><i data-lucide="github" class="w-4 h-4"></i> View on GitHub</a>` : ""}
+    </div>
+  `;
+  projectsGrid.appendChild(el);
+});
+
+// ---------- RENDER: EXPERIENCE TIMELINE ----------
+const timeline = document.getElementById("experienceTimeline");
+experience.forEach((e, idx) => {
+  const isLast = idx === experience.length - 1;
+  const el = document.createElement("div");
+  el.className = "reveal flex gap-6 pb-10";
+  el.innerHTML = `
+    <div class="flex flex-col items-center">
+      <span class="font-mono text-xs text-paper bg-teal rounded-full w-7 h-7 flex items-center justify-center shrink-0">${idx + 1}</span>
+      ${!isLast ? '<span class="w-px flex-1 bg-line mt-2"></span>' : ""}
+    </div>
+    <div class="pb-2">
+      <p class="font-mono text-xs text-inkmute mb-1">${e.period}</p>
+      <h3 class="font-display font-semibold text-lg">${e.role}</h3>
+      <p class="text-inkmute text-sm mt-0.5">${e.org}</p>
+      <p class="font-mono text-xs text-teal mt-2">${e.tag}</p>
+      <ul class="mt-3 space-y-1.5">
+        ${e.points.map(pt => `<li class="text-sm text-inkmute flex gap-2"><span class="text-teal">–</span><span>${pt}</span></li>`).join("")}
+      </ul>
+    </div>
+  `;
+  timeline.appendChild(el);
+});
+
+// ---------- RENDER: FOCUS AREAS ----------
+const focusGrid = document.getElementById("focusGrid");
+focusAreas.forEach(f => {
+  const el = document.createElement("div");
+  el.className = "reveal border border-line rounded-sm bg-card p-6 hover:border-teal/50 transition-colors";
+  el.innerHTML = `
+    <i data-lucide="${f.icon}" class="w-5 h-5 text-teal mb-4"></i>
+    <h3 class="font-display font-semibold text-sm mb-2">${f.title}</h3>
+    <p class="text-sm text-inkmute">${f.desc}</p>
+  `;
+  focusGrid.appendChild(el);
+});
+
+lucide.createIcons();
+
+// ---------- MOBILE MENU ----------
+const menuBtn = document.getElementById("menuBtn");
+const mobileMenu = document.getElementById("mobileMenu");
+menuBtn.addEventListener("click", () => {
+  const isOpen = !mobileMenu.classList.contains("hidden");
+  mobileMenu.classList.toggle("hidden");
+  menuBtn.setAttribute("aria-expanded", String(!isOpen));
+  menuBtn.innerHTML = isOpen ? '<i data-lucide="menu" class="w-6 h-6"></i>' : '<i data-lucide="x" class="w-6 h-6"></i>';
+  lucide.createIcons();
+});
+mobileMenu.querySelectorAll("a").forEach(a => a.addEventListener("click", () => {
+  mobileMenu.classList.add("hidden");
+  menuBtn.setAttribute("aria-expanded", "false");
+  menuBtn.innerHTML = '<i data-lucide="menu" class="w-6 h-6"></i>';
+  lucide.createIcons();
+}));
+
+// ---------- NAVBAR SHADOW ON SCROLL ----------
+const navbar = document.getElementById("navbar");
+window.addEventListener("scroll", () => {
+  navbar.classList.toggle("shadow-sm", window.scrollY > 8);
+});
+
+// ---------- ACTIVE SECTION INDICATOR ----------
+const sections = ["about", "skills", "projects", "experience", "education", "contact"];
+const navLinks = document.querySelectorAll(".nav-link");
+const sectionObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      navLinks.forEach(link => {
+        link.classList.toggle("active", link.getAttribute("href") === `#${entry.target.id}`);
+      });
+    }
+  });
+}, { rootMargin: "-45% 0px -50% 0px" });
+sections.forEach(id => {
+  const el = document.getElementById(id);
+  if (el) sectionObserver.observe(el);
+});
+
+// ---------- SCROLL REVEAL ----------
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add("in");
+      revealObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.12 });
+document.querySelectorAll(".reveal").forEach(el => revealObserver.observe(el));
+
+// ---------- CONTACT FORM (frontend-only placeholder) ----------
+// Swap this handler for a fetch() call to your backend/service of choice
+// (Formspree, Getform, Web3Forms, your own API route, etc.)
+const form = document.getElementById("contactForm");
+const status = document.getElementById("formStatus");
+form.addEventListener("submit", (e) => {
+  e.preventDefault();
+  status.textContent = "This form isn't connected to a backend yet — see the comment in index.html to wire it up.";
+  status.classList.remove("hidden");
+  status.classList.add("text-teal");
+});
+</script>
+</body>
+</html>

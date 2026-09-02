@@ -1,0 +1,5 @@
+Place your resume PDF here, named exactly:
+
+S_Sri_Ram_Resume_Final.pdf
+
+The Download Resume buttons in index.html already point to this path.
