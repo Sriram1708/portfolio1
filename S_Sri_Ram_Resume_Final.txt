@@ -1,0 +1,82 @@
+S SRI RAM
+Electronics & Communication Engineering Student | Embedded Systems & IoT
++91 7397702541 | sriram2482005@gmail.com | linkedin.com/in/sri-ram-b34356320
+
+CAREER OBJECTIVE
+Final-year Electronics and Communication Engineering student specializing in embedded systems, IoT, and hardware design, with four
+end-to-end projects spanning autonomous robotics, real-time power monitoring, and voice-controlled systems. Proficient in Embedded C,
+Verilog HDL, PCB design, and Arduino/ESP32 development. Seeking a Project Engineer Trainee - Hardware role to apply hands-on firmware
+and hardware debugging skills to production-grade embedded products.
+
+SKILLS
+Embedded & Hardware: Embedded C, Arduino, ESP32, ESP32-CAM, Verilog HDL, PCB Design, KiCad, Cadence Virtuoso
+Programming & Tools: Python (Basic), MATLAB (Basic), C (Basic)
+
+PROJECTS
+Smart Waste Cleaning Robot - ESP32-CAM | Academic Project
+April 2026
+• Engineered an autonomous ESP32-CAM waste-collection robot combining real-time object detection with obstacle avoidance for
+unmanned water-surface navigation.
+• Built the motor-control and navigation firmware in Embedded C, enabling the robot to detect, approach, and collect floating waste
+without manual steering.
+Smart 3-Phase Power Monitoring & Automatic Phase Selector - ESP32 | Academic Project
+March 2026
+• Developed an ESP32-based IoT system for real-time 3-phase voltage and current monitoring with automatic relay-based phase
+switching to maintain uninterrupted power supply.
+• Designed a live cloud dashboard using ThingSpeak and Vercel, and validated the complete control logic through Wokwi simulation
+before deploying to physical hardware.
+Voice-Controlled Robot - VC-02 Module | Academic Project
+February 2026
+• Built a voice-controlled robot using Arduino and the VC-02 recognition module, enabling wireless navigation through spoken
+commands.
+• Implemented L298N motor-driver control logic in Arduino IDE (C/C++) to translate recognized voice commands into real-time motor
+actions.
+ESP32-Based Temperature & Humidity Monitoring System - ESP32 | Academic Project
+June 2025
+• Developed an ESP32-based environmental monitoring system using a DHT11 sensor and 0.96-inch OLED display for real-time
+temperature and humidity measurement and visualization.
+• Designed the KiCad schematic and power supply section using an LM2596 buck converter, integrating sensor interfacing, I2C
+communication, and regulated power management.
+
+EXPERIENCE
+Industrial Intern - Telecommunication Department
+June 16 - June 29, 2026
+NLC India Limited, Neyveli
+• Gained hands-on exposure to industrial telecommunication systems and optical fiber network infrastructure.
+• Worked with EPABX systems and LAN networking, strengthening troubleshooting and technical documentation skills.
+VLSI Intern
+MAXVY Technologies
+• Simulated digital logic circuits and counters using Verilog HDL to reinforce core digital design concepts.
+• Studied the FPGA and VLSI design flow end-to-end, from RTL design through simulation and synthesis basics.
+
+Dec 15 - Dec 19, 2025
+
+Embedded Systems Intern
+May 2025 - June 2025
+Bevy Wise Networks, Tirunelveli
+• Programmed microcontrollers and interfaced sensors as part of hands-on embedded systems training.
+• Contributed to basic IoT and automation projects, gaining practical exposure to hardware connections and debugging workflows.
+
+EDUCATION
+B.E. - Electronics and Communication Engineering
+Einstein College of Engineering, Tirunelveli
+Higher Secondary Education
+Vivekananda Vidhyashram Matric Higher Secondary School, Tirunelveli
+
+CERTIFICATIONS
+•
+•
+•
+•
+•
+
+MATLAB Onramp - MathWorks
+Verilog Language & Applications - Cadence Training
+Introduction to C - SoloLearn
+Arduino Design and Code - Udemy
+PCB Design using KiCad
+
+CGPA: 7.72 / 10
+72%
+
+
